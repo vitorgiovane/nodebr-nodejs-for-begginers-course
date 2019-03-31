@@ -36,19 +36,19 @@ function getAddress(userId, callback){
 
 getUser(function userResolver(error, user) {
   if(error) {
-    console.error('An error has ocurred in user', error)
+    console.error('An error has occurred in user', error)
     return
   }
 
   getPhone(user.id, function phoneResolver(error1, phone) {
     if(error1) {
-      console.error('An error has ocurred in phone', error)
+      console.error('An error has occurred in phone', error)
       return
     }
 
     getAddress(user.id, function addressResolver(error2, address){
       if(error2){
-        console.error('An error has ocurred in address', error)
+        console.error('An error has occurred in address', error)
       }
 
       console.log(`
