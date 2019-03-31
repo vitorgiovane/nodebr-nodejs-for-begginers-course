@@ -11,8 +11,7 @@ function getUser(callback){
     callback(null, {
       id: 1,
       name: "Vitor",
-      phone: "99104-3454",
-      address: "Montes Claros"
+      birthday: new Date()
     })
   }, 1000)
 }
@@ -53,7 +52,7 @@ getUser(function userResolver(error, user) {
       }
 
       console.log(`
-        User Name: ${user.name},
+        User Name: ${user.name}
         User Phone: (${phone.ddd}) ${phone.number}
         User Address: ${address.street}, ${address.number}
       `)
