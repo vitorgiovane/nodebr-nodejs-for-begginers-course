@@ -3,14 +3,9 @@ const service = require('./service')
 async function main(){
   try{
     const results = await service.getPeople('a')
-    const names = []
-    results.results.forEach(item => {
-      names.push(item.name)
-    });
-
-    // const names = results.results.map(function(pessoa) {
-    //   return pessoa.name
-    // })
+    console.time('map')
+    const names = results.results.map(pessoa => pessoa.name)
+    console.timeEnd('map')
 
     console.log('names', names)
   }catch(error){
