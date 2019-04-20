@@ -17,4 +17,9 @@ describe("Heroes manipulation suite", () => {
     const [ hero ] = await database.list(ITEM_DEFAULT.id)
     deepEqual(hero, expected)
   })
+  it("Must remove a hero by id", async () => {
+    const expected = true
+    const result = await database.remove(ITEM_DEFAULT.id)
+    deepEqual(result, expected)
+  })
 })
