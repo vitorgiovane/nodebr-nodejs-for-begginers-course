@@ -42,7 +42,7 @@ class Database {
     if(!id) {
       return await this.writeFile([])
     }
-    
+
     const data = await this.getFileData()
     const index = data.findIndex(item => item.id === parseInt(id))
     if(index === -1){
@@ -50,6 +50,30 @@ class Database {
     }
     data.splice(index, 1)
     return await this.writeFile(data)
+  }
+
+  async update(id, newHeroFeatures) {
+    const data = await this.getFileData()
+    const index = data.findIndex(item => item.id === parseInt(id))
+
+    if(index === -1) {
+      throw Error("The informed hero don't exists!")
+    }
+
+    const hero = data[index]
+    const fullUpdatedHero = {
+      ...hero,
+      ...newHeroFeatures
+    }
+    data.splice(index, 1)
+
+    await this.writeFile([
+      ...data,
+      fullUpdatedHero
+    ])
+
+    const updatedHero = await this.list(id)
+    return updatedHero
   }
 }
 
