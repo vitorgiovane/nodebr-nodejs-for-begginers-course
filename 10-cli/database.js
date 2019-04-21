@@ -32,19 +32,19 @@ class Database {
     return result
   }
 
-  async list(id) {
+  async list(heroId) {
     const data = await this.getFileData()
-    const filteredData = data.filter(item => (id ? item.id === id : true))
+    const filteredData = data.filter(item => (heroId ? item.id === heroId : true))
     return filteredData
   }
 
-  async remove(id) {
-    if(!id) {
+  async delete(heroId) {
+    if(!heroId) {
       return await this.writeFile([])
     }
-
+    
     const data = await this.getFileData()
-    const index = data.findIndex(item => item.id === parseInt(id))
+    const index = data.findIndex(item => item.id === parseInt(heroId))
     if(index === -1){
       throw Error("The informed hero don't exists!")
     }
@@ -52,9 +52,9 @@ class Database {
     return await this.writeFile(data)
   }
 
-  async update(id, newHeroFeatures) {
+  async update(heroId, newHeroFeatures) {
     const data = await this.getFileData()
-    const index = data.findIndex(item => item.id === parseInt(id))
+    const index = data.findIndex(item => item.id === parseInt(heroId))
 
     if(index === -1) {
       throw Error("The informed hero don't exists!")
@@ -72,7 +72,7 @@ class Database {
       fullUpdatedHero
     ])
 
-    const updatedHero = await this.list(id)
+    const updatedHero = await this.list(heroId)
     return updatedHero
   }
 }
